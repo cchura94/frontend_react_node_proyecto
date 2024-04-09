@@ -22,7 +22,7 @@ const Login = () => {
 
     return (
         <div>
-            <h1>Ingresar</h1>
+            <h1 className="text-3xl font-bold underline">Ingresar</h1>
             {email} - {password}
             <br />
           

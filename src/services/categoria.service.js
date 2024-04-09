@@ -15,6 +15,10 @@ const categoriaService = {
         return api.put('/categoria/'+id, datos);
     },
 
+    eliminar: (id) => {
+        return api.delete('/categoria/'+id);
+    },
+
 }
 
 export default categoriaService;
