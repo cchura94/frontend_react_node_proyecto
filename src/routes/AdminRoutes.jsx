@@ -1,5 +1,7 @@
 import AdminLayout from "../layouts/AdminLayouts";
 import Categoria from "../views/admin/categoria/Categoria";
+import Producto from "../views/admin/producto/Producto";
+import Usuario from "../views/admin/usuario/Usuario";
 
 const AdminRoutes = {
     path: '/admin',
@@ -11,11 +13,15 @@ const AdminRoutes = {
         },
         {
             path: 'usuario',
-            element: <h2>Usuarios</h2>
+            element: <Usuario></Usuario>
         },
         {
             path: 'categoria',
             element: <Categoria />
+        },
+        {
+            path: 'producto',
+            element: <Producto />
         }
     ]
 }
