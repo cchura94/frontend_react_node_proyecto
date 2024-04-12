@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import categoriaService from "../../../services/categoria.service";
 import { useState } from "react";
+import Swal from 'sweetalert2'
 
 const Categoria = () => {
 
@@ -24,10 +25,27 @@ const Categoria = () => {
         try {
             if (categoria.id) {
                 const { data } = await categoriaService.modificar(categoria.id, categoria)
+
+                Swal.fire({
+                    title: 'Categoria actualizada!',
+                    text: 'Ok para continuar',
+                    icon: 'success',
+                    confirmButtonText: 'ok'
+                  })
+                  setModalOpen(false)
                 setCategoria(categoriaBlank)
                 getCategorias()
             } else {
                 const { data } = await categoriaService.guardar(categoria)
+
+                Swal.fire({
+                    title: 'Categoria registrada!',
+                    text: 'Ok para continuar',
+                    icon: 'success',
+                    confirmButtonText: 'ok'
+                  })
+
+                  setModalOpen(false)
                 setCategoria(categoriaBlank)
                 getCategorias()
             }
