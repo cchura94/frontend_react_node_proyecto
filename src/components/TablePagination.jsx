@@ -1,5 +1,8 @@
-const TablePagination = ({ columns, data, handleEdit, handleShow, handleDelete }) => {
+import { useState } from "react";
 
+const TablePagination = ({ columns, data, fetchData, total, page, handleEdit, handleShow, handleDelete }) => {
+
+    const [itemPerPage, setItemPerPage] = useState(3);
     return (<>
         <h1>Componente Tabla (Hijo)</h1>
 
@@ -49,6 +52,24 @@ const TablePagination = ({ columns, data, handleEdit, handleShow, handleDelete }
 
             </tbody>
         </table>
+        <div className="flex justify-center mt-4">
+            <nav className="inline-flex rounded-md shadow">
+                <button onClick={() => fetchData(page-1)} disabled={page==1} className="py-2 px-4 bg-gray-200 text-gray-500 hover:bg-gray-300 rounded-l-md">anterior</button>
+                    
+                    { total > itemPerPage && (
+                        <div className="flex">
+                            {Array.from({ length: Math.ceil(total/itemPerPage)}).map((_, index) => (
+                                <button key={index} onClick={() => fetchData(index+1)} className={`${page === index+1? 'bg-blue-500 text-white': 'bg-gray-200 text-gray-700'} py-2 px-4 mx-1 rounded-md focus:outline-none`}>{index+1}</button>
+                            ))}
+                        </div>
+                    )
+
+                    }
+                <button onClick={() => fetchData(page+1)} disabled={page==Math.ceil(total / itemPerPage)} className="py-2 px-4 bg-gray-200 text-gray-500 hover:bg-gray-300 rounded-r-md">siguiente</button>
+                
+            </nav>
+
+        </div>
     </>)
 }
 

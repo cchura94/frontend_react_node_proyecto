@@ -13,7 +13,8 @@ const Login = () => {
         try {
             const {data} = await authService.loginConNode({email: email, password: password});
             console.log(data)
-            alert("Logueando con Node...");
+            localStorage.setItem("access_token", data.access_token)
+            localStorage.setItem("userData", JSON.stringify(data.usuario))
             
         } catch (error) {
             alert("Credenciales incorrectas...");
