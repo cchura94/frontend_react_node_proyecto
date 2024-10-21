@@ -15,14 +15,18 @@ const Usuario = () => {
     const [usuario, setUsuario] = useState({})
     const [usuarios, setUsuarios] = useState([]);
     const [openModal, setOpenModal] = useState(false)
+    const [page, setPage] = useState(1);
+    const [total, setTotal] = useState(0)
 
     useEffect(() => {
         funListar()
     }, [])
 
-    const funListar = async () => {
-        const { data } = await usuarioService.listar()
-        setUsuarios(data);
+    const funListar = async (page=1, limit=3, q='') => {
+        setPage(page)
+        const { data } = await usuarioService.listar(page, limit, q)
+        setUsuarios(data.rows);
+        setTotal(data.count)
     }
 
     const guardarUsuario = async (e) => {
@@ -47,7 +51,7 @@ const Usuario = () => {
         <h1>Gestión Usuarios</h1>
 
         <button className="bg-blue-300 hover:bg-blue-400 py-2 px-4 rounded" onClick={() => setOpenModal(true)}>Nuevo Usuario</button>
-        <TablePagination columns={columnas} data={usuarios} handleShow={true}>
+        <TablePagination columns={columnas} data={usuarios} fetchData={funListar} total={total} page={page} handleShow={true}>
         </TablePagination>
         
         <Modal modalOpen={openModal} setModalOpen={setOpenModal} >

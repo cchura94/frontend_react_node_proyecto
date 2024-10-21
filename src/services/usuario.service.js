@@ -2,8 +2,8 @@ import api from './Api'
 
 const usuarioService = {
 
-    listar: () => {
-        return api.get(`/user`);
+    listar: (page=1, limit=10, q='') => {
+        return api.get(`/user?page=${page}&limit=${limit}&q=${q}`);
     },
     mostrar: (id) => {
         return api.get('/user/'+id);
